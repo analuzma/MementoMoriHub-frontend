@@ -1,142 +1,53 @@
-// import {  Form,Modal  } from "antd";
-// import { FormItem } from "../components";
-// import { Link, useLocation, useNavigate } from "react-router-dom";
-// //me traigo mis servicios!!! LoginWS SignupWS
-// import { loginWs, signupWs } from '../services/auth-ws'
-// /**
-//  * 
-//  * @param {*} props 
-//  * @returns 
-//  */
-// const AuthPage = (props) => {
-//   //utilizo el hook useLocation
-//   const location = useLocation()
-//   const navigate = useNavigate()
+import * as React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import Paper from '@mui/material/Paper';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
+import { SignUpForm} from '../components/'
 
-//   const onFinish = (values) => {
-//     if(location.pathname === "/signup" && values.password !== values.confirmPassword){
-//       return Modal.error({content:"hey que paso las contraseñas no coinciden"})
-//     }
-//     //forma dinamica 
-//     const service = location.pathname === "/signup" ? signupWs(values) : loginWs(values)
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
-//     service.then(res=>{
-//       const {data,status,errorMessage} = res;
-//       if(status){
-       
-//         props.authentication(data.user)
-//         Modal.success({content: "Todo chido ya pudiste entrar"})
-//         navigate("/profile")
-//         return;
-//       }else{
-//         //pueden guardar el errorMessage en un state para mostrarlo en el html 
-//         Modal.error({content: errorMessage})
-//       }
-//     })
-   
-//   };
+const theme = createTheme();
 
-//   const onFinishAsync = async(values) => {
-//     if(values.password !== values.confirmPassword){
-//       return alert("hey que paso las contraseñas no coinciden")
-//     }
-//     try{
-//       const {data} = await signupWs(values)
-//       alert("Todo chido ya pudiste entrar")
-//     }catch(error){
-//       console.log(error)
-//       alert("No se puede registrar")
-//     }
-//   }
-
-//   const onFinishFailed = (errorInfo) => {
-//     console.log("Failed:", errorInfo);
-//   };
+const AuthPage = (props) => {
 
 
+  return (
+    <ThemeProvider theme={theme}>
+      <Grid container component="main" sx={{ height: '10vh' }}>
+        <CssBaseline />
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={7}
+          sx={{
+            backgroundImage: 'url(https://source.unsplash.com/random)',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: (t) =>
+              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        />
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+          <SignUpForm/>
+  
+          </Box>
+        </Grid>
+      </Grid>
+    </ThemeProvider>
+  );
+}
 
-
-//   return (
-//     <Form
-//       name="basic"
-//       labelCol={{
-//         span: 8,
-//       }}
-//       wrapperCol={{
-//         span: 16,
-//       }}
-//       onFinish={onFinish}
-//       onFinishFailed={onFinishFailed}
-//       autoComplete="off"
-//     >
-//       {/* con mas de dos elementos */}
-//       {location.pathname === "/signup" ?
-//       <>
-//         <FormItem
-//           label="Nombre"
-//           name="firstName"
-//           type="text"
-//         />
-//         <FormItem
-//           label="Apellido(s)"
-//           name="lastName"
-//           type="text"
-//         /> 
-//       </> : null}
-//       {/* {location.pathname === "/signup" &&} */}
-//       <FormItem
-//         label="Correo"
-//         name="email"
-//         type="text"
-//         rules={[
-//           {
-//             required: true,
-//             message: "Coloca tu correo!",
-//           },
-//         ]}
-//       />
-//       <FormItem
-//         label="Contraseña"
-//         name="password"
-//         type="password"
-//         rules={[
-//           {
-//             required: true,
-//             message: "Por favor ingresa tu contraseña!",
-//           },
-//         ]}
-//       />
-//       {/* && */}
-//       {location.pathname === "/signup" && <FormItem
-//         label="Confirma tu contraseña"
-//         name="confirmPassword"
-//         type="password"
-//         rules={[
-//           {
-//             required: true,
-//             message: "Por favor ingresa tu confirmacion de contraseña!",
-//           },
-//         ]}
-//       />
-//       }
-//       <FormItem
-//         button_text="enviar"
-//         type="button"
-//         wrapperCol={{
-//           offset: 8,
-//           span: 16,
-//         }}
-       
-//       />
-//       {location.pathname === "/signup" ?
-//         <p> Si ya tienes cuenta <Link to="/login">ingresa!</Link></p>
-//        :
-//        <p> Si aun no tienes cuenta <Link to="/signup">registrate!</Link></p>
-//        }
-      
-//     </Form>
-//   );
-// };
-
-// export default AuthPage;
+export default AuthPage;

@@ -1,5 +1,5 @@
 //importar mis pages
-import {SignInSide}  from '../pages'
+import {AuthPage}  from '../pages'
 
 const routes = (props)=>{
 
@@ -11,12 +11,12 @@ const routes = (props)=>{
         },
         {
             path:"/login",
-            element:<SignInSide {...props}/>
+            element:<AuthPage {...props}/>
         },
-        // {
-        //     path:"/signup",
-        //     element:<AuthPage {...props}/>
-        // },
+        {
+            path:"/signup",
+            element:<AuthPage {...props}/>
+        },
         // {
         //     path:"/profile",
         //     element:<ProfilePage {...props}/>
