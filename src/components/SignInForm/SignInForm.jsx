@@ -5,8 +5,6 @@ import {
   Button,
   CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Grid,
   Box,
   Typography,
@@ -17,9 +15,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers/';
-import { useNavigate } from "react-router-dom";
 
-import { signupWs } from "../../services/auth-ws";
+import { loginWs } from "../../services/auth-ws";
 
 function Copyright(props) {
   return (
@@ -30,7 +27,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link style={{ textDecoration: 'none', color: 'inherit',}} to="/">
+      <Link color="inherit" to="/">
         Your Website
       </Link>{" "}
       {new Date().getFullYear()}
@@ -41,15 +38,13 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUpForm() {
+export default function SignInForm(props) {
   const [firstName, setFirstName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState(useState(dayjs()));
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
-  const navigate = useNavigate()
-
+console.log("los props", props)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = {
@@ -61,12 +56,11 @@ export default function SignUpForm() {
     };
 
     try {
-      const data = await signupWs(response);
-      console.log("you signed up:",data);
-      navigate("/profile")
-      return;
+      const data = await loginWs(response);
+      console.log(data);
+      props.sendMessage("todo chido", "severity")
     } catch (error) {
-      console.log(error.response.data); //add a snackbar
+      console.log(error.response.data);
     }
   }
 
@@ -86,40 +80,10 @@ export default function SignUpForm() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Sign In
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
-            {/* first name input */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                autoComplete="given-name"
-                name="firstName"
-                required
-                fullWidth
-                id="firstName"
-                label="First Name"
-                autoFocus
-                onChange={(e) => setFirstName(e.target.value)}
-              />
-            </Grid>
-            {/* Date Of Birth (dob) input */}
-            <Grid item xs={12} sm={6}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                disableFuture
-                id="dateOfBirth"
-                label="Date of Birth"
-                openTo="year"
-                minDate={dayjs('1922-00-00')}
-                maxDate={dayjs('2123-00-00')}
-                views={['year', 'month', 'day']}
-                value={dateOfBirth}
-                onChange={(newDateOfBirth) => {setDateOfBirth(newDateOfBirth)}}
-                renderInput={(params) => <TextField {...params} />}
-              />
-              </LocalizationProvider>
-            </Grid>
             {/* email input */}
             <Grid item xs={12}>
               <TextField
@@ -145,26 +109,7 @@ export default function SignUpForm() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Grid>
-            {/* confirm password input*/}
-              <Grid item xs={12}>
-              <TextField
-                required
-                fullWidth
-                name="confirmPassword"
-                label="Confirm Password"
-                type="password"
-                id="confirmPassword"
-                autoComplete="new-password"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </Grid>
-              {/* checkbox  input
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid> */}
+
           </Grid>
           <Button
             type="submit"
@@ -172,12 +117,12 @@ export default function SignUpForm() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Sign Up
+            Sign In
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
-              <Link to="/signin" variant="body2" style={{ textDecoration: 'none', color: 'inherit',}}>
-                Already have an account? Sign in
+              <Link to="/signup" variant="body2" style={{ textDecoration: 'none', color: 'inherit'}}>
+                Don't have an account? Sign Up
               </Link>
             </Grid>
           </Grid>
@@ -188,6 +133,3 @@ export default function SignUpForm() {
   </ThemeProvider>
 );
 }
-   
-
-    

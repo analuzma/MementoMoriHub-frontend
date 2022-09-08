@@ -2,15 +2,15 @@
 import {AuthPage}  from '../pages'
 
 const routes = (props)=>{
-
+console.log("props desde rutas", props)
     //<Route path="/" element={componente} />
     return [
         {
             path: "/", //Homepage
-            element:<h1>Este es el home</h1>
+            element:<h1>Remember you will die</h1>
         },
         {
-            path:"/login",
+            path:"/signin",
             element:<AuthPage {...props}/>
         },
         {

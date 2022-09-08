@@ -1,20 +1,38 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
+import {AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem, Container, Avatar, Button, Tooltip} from '@mui/material/';
 import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from "react-router-dom";
 
-const pages = ['Calendar', 'Journal', 'resources','wisdom'];
-const settings = ['Profile', 'Account', 'Dark Mode', 'Logout'];
+const pages = [
+    {
+      name: 'Calendar',
+      path: '/calendar'
+    },
+    {
+      name: 'Journal',
+      path: '/journal'
+    },
+      {
+      name: 'Resources',
+      path: '/resources'
+    },
+      {
+      name: 'wisdom',
+      path: '/wisdom'
+    }];
+const settings = [
+    {
+      name: 'Sign Up',
+      path: '/signup'
+    },
+    {
+      name: 'Sign In',
+      path: '/signin'
+    },
+      {
+      name: 'Log Out'
+    }];
 
 const Navbar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -39,12 +57,12 @@ const Navbar = () => {
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar variant="dense" disableGutters>
+          <Link to="/"  style={{ textDecoration: 'none', color: 'inherit'}}>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -56,7 +74,7 @@ const Navbar = () => {
             }}
           >
             MEMENTO MORI HUB
-          </Typography>
+          </Typography></Link>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -87,13 +105,14 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map(({name, path, index}) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center"><Link to={path}  style={{ textDecoration: 'none' }}>{name}</Link></Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+          <Link to="/"  style={{ textDecoration: 'none', color: 'inherit' }}>
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -113,15 +132,18 @@ const Navbar = () => {
           >
             MEMENTO MORI HUB
           </Typography>
+          </Link>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            {pages.map(({name, path, index}) => (
+              <Link to={path}  style={{ textDecoration: 'none' }}>
               <Button
-                key={page}
+                key={index}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {name}
               </Button>
+              </Link>
             ))}
           </Box>
 
@@ -147,9 +169,13 @@ const Navbar = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {settings.map(({name,path, index}) => (
+                <MenuItem key={index} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    <Link to={path}  style={{ textDecoration: 'none', color: 'inherit' }}>
+                      {name}
+                      </Link>
+                      </Typography>
                 </MenuItem>
               ))}
             </Menu>
