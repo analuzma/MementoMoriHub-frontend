@@ -1,16 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import "./App.css";
 //importar las rutas a utilizar
 import routes from "./config/routes";
-import { Routes, Route,useNavigate } from "react-router-dom";
+                                    //useNavigate
+import { Routes, Route} from "react-router-dom";
 import { Navbar} from "./components";
-import { logoutWs } from "./services/auth-ws";
+// import { logoutWs } from "./services/auth-ws";
 import SnackbarCustom from "./components/SnackbarCustom/SnackbarCustom"
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
-//importar los componentes o funcion  que sean globales
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+
 function App() {
+  // const navigate = useNavigate()
+
+  //user
   const [user, setUser] = useState(null);
-  const navigate = useNavigate()
+
+    const authentication = async (user) => {
+    setUser(user);
+  };
 
 const [stackSnackbar, setStackSnackBar]=useState({message:"demo",severity:"success", open:false})
 
@@ -19,18 +34,19 @@ const handleClose = () => {
 }
 //personalizar el mensaje queda pendiente //checa el severity para color
 function sendMessage(message, severity){
-  console.log("send message")
   setStackSnackBar({message, open:true, severity})
 }
-  function authentication(user) {
-    setUser(user);
-  }
-  function handleLogout() {
-      setStackSnackBar(prevState=>({...prevState, open:true}))
-  }
+
+    const handleLogout = () => {
+   sendMessage("You have logged out", "success")
+  setUser(null);
+  };
+
 
   return (
     <div className="App">
+         <ThemeProvider theme={darkTheme}>
+           <CssBaseline />
       <SnackbarCustom {...{...stackSnackbar, handleClose}}/>
           <Navbar
         user={user}
@@ -41,10 +57,11 @@ function sendMessage(message, severity){
 
         {routes({ user, handleLogout, authentication, sendMessage }).map(
           ({ path, element }, index_route) => (
-            <Route key={path} {...{ path, element }} />
+            <Route key={index_route} {...{ path, element }} />
           )
         )}
       </Routes>
+      </ThemeProvider>
     </div>
   );
 }

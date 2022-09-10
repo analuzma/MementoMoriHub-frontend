@@ -1,8 +1,7 @@
 //importar mis pages
-import {AuthPage}  from '../pages'
+import {AuthPage, ProfilePage}  from '../pages'
 
 const routes = (props)=>{
-console.log("props desde rutas", props)
     //<Route path="/" element={componente} />
     return [
         {
@@ -17,10 +16,10 @@ console.log("props desde rutas", props)
             path:"/signup",
             element:<AuthPage {...props}/>
         },
-        // {
-        //     path:"/profile",
-        //     element:<ProfilePage {...props}/>
-        // }
+        {
+            path:"/profile",
+            element:<ProfilePage {...props}/>
+        }
     ]
 }
 

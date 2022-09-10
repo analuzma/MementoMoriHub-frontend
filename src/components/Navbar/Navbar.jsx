@@ -1,8 +1,12 @@
 import * as React from 'react';
+import { useNavigate } from "react-router-dom";
 import {AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem, Container, Avatar, Button, Tooltip} from '@mui/material/';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
+import LoginIcon from '@mui/icons-material/Login';
 import { Link } from "react-router-dom";
+import { logoutWs } from '../../services/auth-ws';
+
 
 const pages = [
     {
@@ -29,12 +33,11 @@ const settings = [
     {
       name: 'Sign In',
       path: '/signin'
-    },
-      {
-      name: 'Log Out'
     }];
 
-const Navbar = () => {
+const Navbar = ({user, ...props}) => {
+  const navigate = useNavigate()
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -53,12 +56,24 @@ const Navbar = () => {
     setAnchorElUser(null);
   };
 
+    const handleLogin = () => {
+    navigate("/login");
+  };
+
+  function handleLogout() {
+    logoutWs();
+    setAnchorElUser(null)
+    props.handleLogout()
+    navigate("/");
+  };
+
   return (
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar variant="dense" disableGutters>
-          <Link to="/"  style={{ textDecoration: 'none', color: 'inherit'}}>
+  
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
           <Typography
             variant="h6"
             noWrap
@@ -87,6 +102,7 @@ const Navbar = () => {
             >
               <MenuIcon />
             </IconButton>
+            
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -112,13 +128,12 @@ const Navbar = () => {
               ))}
             </Menu>
           </Box>
-          <Link to="/"  style={{ textDecoration: 'none', color: 'inherit' }}>
+ 
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
+                    <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><Typography
             variant="h5"
             noWrap
             component="a"
-            href=""
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -131,13 +146,14 @@ const Navbar = () => {
             }}
           >
             MEMENTO MORI HUB
-          </Typography>
-          </Link>
+          </Typography></Link>
+            {/* if there is an active user */}
+            {user?
+          <>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map(({name, path, index}) => (
-              <Link to={path}  style={{ textDecoration: 'none' }}>
+              <Link key={index} to={path}  style={{ textDecoration: 'none' }}>
               <Button
-                key={index}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
@@ -146,7 +162,6 @@ const Navbar = () => {
               </Link>
             ))}
           </Box>
-
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -180,6 +195,15 @@ const Navbar = () => {
               ))}
             </Menu>
           </Box>
+</>
+          :
+        <Link to="/signup"  style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Button variant="contained" endIcon={<LoginIcon />} disableRipple>     
+          Access
+        </Button>
+          </Link>
+
+          }
         </Toolbar>
       </Container>
     </AppBar>

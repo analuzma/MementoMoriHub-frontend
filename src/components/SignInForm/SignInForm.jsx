@@ -1,9 +1,8 @@
 import { useState, React } from "react";
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {
   Avatar,
   Button,
-  CssBaseline,
   TextField,
   Grid,
   Box,
@@ -11,11 +10,6 @@ import {
   Container,
 } from "@mui/material/";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import dayjs from 'dayjs';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers/';
-
 import { loginWs } from "../../services/auth-ws";
 
 function Copyright(props) {
@@ -27,8 +21,8 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" to="/">
-        Your Website
+      <Link style={{ textDecoration: 'none', color:'inherit'}} to="/">
+        Memento Mori Hub
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -36,38 +30,46 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
 
 export default function SignInForm(props) {
-  const [firstName, setFirstName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState(useState(dayjs()));
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-console.log("los props", props)
+    const navigate = useNavigate()
+     const [response, setResponse] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = response
+
+    const handleChange = (e) => {
+    setResponse({
+      ...response,
+      [e.target.name]: e.target.response,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = {
-      firstName,
-      dateOfBirth,
+    const credentials = {
       email,
       password,
-      confirmPassword,
     };
-
     try {
-      const data = await loginWs(response);
-      console.log(data);
-      props.sendMessage("todo chido", "severity")
+      const {data, status, errorMessage} = await loginWs(credentials);
+      if (status){
+      navigate("/profile")
+      props.authenticate(data.user)
+      props.sendMessage("Welcome back!", "success")
+    return data;
+      } else {
+        props.sendMessage({content:errorMessage}, "warning");
+    }
     } catch (error) {
-      console.log(error.response.data);
+      props.sendMessage({content:error.errorMessage}, "warning");
     }
   }
 
   return (
-    <ThemeProvider theme={theme}>
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
+    <Container component="main" maxWidth="xs" >
       <Box
         sx={{
           marginTop: 8,
@@ -93,7 +95,7 @@ console.log("los props", props)
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChange}
               />
             </Grid>
             {/* password  input*/}
@@ -106,7 +108,7 @@ console.log("los props", props)
                 type="password"
                 id="password"
                 autoComplete="new-password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChange}
               />
             </Grid>
 
@@ -116,13 +118,14 @@ console.log("los props", props)
             fullWidth
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
+            onClick={handleSubmit}
           >
             Sign In
           </Button>
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link to="/signup" variant="body2" style={{ textDecoration: 'none', color: 'inherit'}}>
-                Don't have an account? Sign Up
+                Don't have an account?<Button>Sign Up</Button>
               </Link>
             </Grid>
           </Grid>
@@ -130,6 +133,5 @@ console.log("los props", props)
       </Box>
       <Copyright sx={{ mt: 5 }} />
     </Container>
-  </ThemeProvider>
 );
 }

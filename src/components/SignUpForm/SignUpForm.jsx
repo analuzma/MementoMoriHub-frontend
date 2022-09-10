@@ -1,24 +1,18 @@
 import { useState, React } from "react";
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {
   Avatar,
   Button,
-  CssBaseline,
   TextField,
-  FormControlLabel,
-  Checkbox,
   Grid,
   Box,
   Typography,
   Container,
 } from "@mui/material/";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import dayjs from 'dayjs';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider, DatePicker } from '@mui/x-date-pickers/';
-import { useNavigate } from "react-router-dom";
-
 import { signupWs } from "../../services/auth-ws";
 
 function Copyright(props) {
@@ -31,7 +25,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link style={{ textDecoration: 'none', color: 'inherit',}} to="/">
-        Your Website
+        Memento Mori Hub
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -39,20 +33,30 @@ function Copyright(props) {
   );
 }
 
-const theme = createTheme();
-
-export default function SignUpForm() {
-  const [firstName, setFirstName] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState(useState(dayjs()));
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-
+function SignUpForm(props) {
   const navigate = useNavigate()
+
+   const [response, setResponse] = useState({
+    firstName: "",
+    dateOfBirth: (dayjs()),
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const { firstName, dateOfBirth, email, password, confirmPassword } = response
+  // const [error, setError] = useState(null);
+
+    const handleChange = (e) => {
+    setResponse({
+      ...response,
+      [e.target.name]: e.target.response,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = {
+    const data = {
       firstName,
       dateOfBirth,
       email,
@@ -60,20 +64,26 @@ export default function SignUpForm() {
       confirmPassword,
     };
 
-    try {
-      const data = await signupWs(response);
-      console.log("you signed up:",data);
-      navigate("/profile")
-      return;
-    } catch (error) {
-      console.log(error.response.data); //add a snackbar
+    signupWs(data)
+    .then(res=>{
+      const{ data,status,errorMessage} = res
+      console.log("el res", res)
+      if (status){
+        console.log("el data",data)
+        props.authentication(data.user)
+        props.sendMessage("You have signed in!", "severity")
+        navigate('/profile')
+        return;
+      }else{
+        //pueden guardar el errorMessage en un state para mostrrlo en el html
+        props.sendMessage({content:errorMessage}, "severity")
+      }
     }
+    )
   }
 
   return (
-    <ThemeProvider theme={theme}>
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
@@ -90,6 +100,26 @@ export default function SignUpForm() {
         </Typography>
         <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
+            {/* Date Of Birth (dob) input */}
+            <Grid item xs={12} sm={6}>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DatePicker
+                disableFuture
+                id="dateOfBirth"
+                name="dateOfBirth"
+                inputFormat="DD/MM/YYYY"
+                label="Date of Birth"
+                openTo="year"
+                minDate={dayjs('1922-00-00')}
+                views={['year', 'month', 'day']}
+                value={response}
+                onChange={(newResponse) => {
+      setResponse(newResponse);
+    }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+              </LocalizationProvider>
+            </Grid>
             {/* first name input */}
             <Grid item xs={12} sm={6}>
               <TextField
@@ -100,25 +130,8 @@ export default function SignUpForm() {
                 id="firstName"
                 label="First Name"
                 autoFocus
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={handleChange}
               />
-            </Grid>
-            {/* Date Of Birth (dob) input */}
-            <Grid item xs={12} sm={6}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                disableFuture
-                id="dateOfBirth"
-                label="Date of Birth"
-                openTo="year"
-                minDate={dayjs('1922-00-00')}
-                maxDate={dayjs('2123-00-00')}
-                views={['year', 'month', 'day']}
-                value={dateOfBirth}
-                onChange={(newDateOfBirth) => {setDateOfBirth(newDateOfBirth)}}
-                renderInput={(params) => <TextField {...params} />}
-              />
-              </LocalizationProvider>
             </Grid>
             {/* email input */}
             <Grid item xs={12}>
@@ -129,7 +142,7 @@ export default function SignUpForm() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChange}
               />
             </Grid>
             {/* password  input*/}
@@ -142,7 +155,7 @@ export default function SignUpForm() {
                 type="password"
                 id="password"
                 autoComplete="new-password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChange}
               />
             </Grid>
             {/* confirm password input*/}
@@ -155,7 +168,7 @@ export default function SignUpForm() {
                 type="password"
                 id="confirmPassword"
                 autoComplete="new-password"
-                onChange={(e) => setConfirmPassword(e.target.value)}
+                onChange={handleChange}
               />
             </Grid>
               {/* checkbox  input
@@ -170,6 +183,7 @@ export default function SignUpForm() {
             type="submit"
             fullWidth
             variant="contained"
+            onClick={handleSubmit}
             sx={{ mt: 3, mb: 2 }}
           >
             Sign Up
@@ -177,7 +191,7 @@ export default function SignUpForm() {
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link to="/signin" variant="body2" style={{ textDecoration: 'none', color: 'inherit',}}>
-                Already have an account? Sign in
+                Already have an account? <Button>Sign in</Button>
               </Link>
             </Grid>
           </Grid>
@@ -185,9 +199,6 @@ export default function SignUpForm() {
       </Box>
       <Copyright sx={{ mt: 5 }} />
     </Container>
-  </ThemeProvider>
-);
-}
-   
+  )};
 
-    
+export default SignUpForm
