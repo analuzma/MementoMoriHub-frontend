@@ -33,6 +33,7 @@ function Copyright(props) {
 
 export default function SignInForm(props) {
     const navigate = useNavigate()
+
      const [response, setResponse] = useState({
     email: "",
     password: "",
@@ -43,7 +44,7 @@ export default function SignInForm(props) {
     const handleChange = (e) => {
     setResponse({
       ...response,
-      [e.target.name]: e.target.response,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -53,19 +54,21 @@ export default function SignInForm(props) {
       email,
       password,
     };
-    try {
-      const {data, status, errorMessage} = await loginWs(credentials);
+
+    loginWs(credentials)
+    .then(res=>{
+      const{ data,status,errorMessage} = res
       if (status){
-      navigate("/profile")
-      props.authenticate(data.user)
-      props.sendMessage("Welcome back!", "success")
-    return data;
-      } else {
-        props.sendMessage({content:errorMessage}, "warning");
+        props.authentication(data.user)
+        props.sendMessage("Welcome back!", "severity")
+        navigate('/profile')
+        return;
+      }else{
+        //pueden guardar el errorMessage en un state para mostrrlo en el html
+        props.sendMessage({content:errorMessage}, "severity")
+      }
     }
-    } catch (error) {
-      props.sendMessage({content:error.errorMessage}, "warning");
-    }
+    )
   }
 
   return (
@@ -99,7 +102,7 @@ export default function SignInForm(props) {
               />
             </Grid>
             {/* password  input*/}
-            <Grid item xs={12}>
+          <Grid item xs={12}>
               <TextField
                 required
                 fullWidth
@@ -107,7 +110,7 @@ export default function SignInForm(props) {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="new-password"
+                autoComplete="password"
                 onChange={handleChange}
               />
             </Grid>

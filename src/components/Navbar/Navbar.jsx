@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { useNavigate } from "react-router-dom";
-import {AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem, Container, Avatar, Button, Tooltip} from '@mui/material/';
+import {AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem, Container, Avatar, Button, Tooltip} from '@mui/material/'
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from "react-router-dom";
-import { logoutWs } from '../../services/auth-ws';
-
 
 const pages = [
     {
@@ -25,17 +25,8 @@ const pages = [
       name: 'wisdom',
       path: '/wisdom'
     }];
-const settings = [
-    {
-      name: 'Sign Up',
-      path: '/signup'
-    },
-    {
-      name: 'Sign In',
-      path: '/signin'
-    }];
 
-const Navbar = ({user, ...props}) => {
+const Navbar = ({user, setUser, sendMessage}) => {
   const navigate = useNavigate()
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -55,23 +46,22 @@ const Navbar = ({user, ...props}) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  // console.log("props", props)
 
-    const handleLogin = () => {
-    navigate("/login");
-  };
-
-  function handleLogout() {
-    logoutWs();
-    setAnchorElUser(null)
-    props.handleLogout()
+    const handleLogout = () => {
+    console.log("cerraste sesion")
+    setUser(null)
+    localStorage.removeItem("user")
+    //ver porque no trae propiedades y extrerlas
+    sendMessage("You have logged out", "success")
     navigate("/");
   };
+
 
   return (
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar variant="dense" disableGutters>
-  
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
           <Typography
@@ -87,10 +77,12 @@ const Navbar = ({user, ...props}) => {
               color: 'inherit',
               textDecoration: 'none',
             }}
-          >
+            >
             MEMENTO MORI HUB
           </Typography></Link>
-
+        
+            { user ?
+              <>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -127,14 +119,13 @@ const Navbar = ({user, ...props}) => {
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
- 
+          </Box></>
+          : <></> }
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><Typography
             variant="h5"
             noWrap
-            component="a"
-            sx={{
+              sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
@@ -152,7 +143,7 @@ const Navbar = ({user, ...props}) => {
           <>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map(({name, path, index}) => (
-              <Link key={index} to={path}  style={{ textDecoration: 'none' }}>
+              <Link key={index} to={path}  style={{ textDecoration: 'none', color: 'inherit' }}>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
@@ -165,34 +156,43 @@ const Navbar = ({user, ...props}) => {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt={user.firstName} src={user.imageUrl} />
               </IconButton>
             </Tooltip>
             <Menu
-              sx={{ mt: '45px' }}
+              sx={{ mt: '35px' }}
               id="menu-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'left',
               }}
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'left',
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map(({name,path, index}) => (
-                <MenuItem key={index} onClick={handleCloseUserMenu}>
+              {/* user settings */}
+                <MenuItem  onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
-                    <Link to={path}  style={{ textDecoration: 'none', color: 'inherit' }}>
-                      {name}
+                    <Link to={'/profile'}  style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <AccountCircleIcon></AccountCircleIcon>Profile
                       </Link>
                       </Typography>
                 </MenuItem>
-              ))}
+                              <MenuItem  onClick={handleCloseUserMenu}>
+                  <div onClick={handleLogout}>
+                    <Typography textAlign="center" >
+              <LogoutRoundedIcon  fontSize="small" 
+             >
+               </LogoutRoundedIcon>Log Out
+                      </Typography>
+                      </div>
+  
+                </MenuItem>
             </Menu>
           </Box>
 </>

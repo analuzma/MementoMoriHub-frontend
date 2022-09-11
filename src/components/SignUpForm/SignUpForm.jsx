@@ -50,7 +50,7 @@ function SignUpForm(props) {
     const handleChange = (e) => {
     setResponse({
       ...response,
-      [e.target.name]: e.target.response,
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -67,16 +67,14 @@ function SignUpForm(props) {
     signupWs(data)
     .then(res=>{
       const{ data,status,errorMessage} = res
-      console.log("el res", res)
       if (status){
-        console.log("el data",data)
         props.authentication(data.user)
-        props.sendMessage("You have signed in!", "severity")
+        props.sendMessage("You have signed up!", "success")
         navigate('/profile')
         return;
       }else{
         //pueden guardar el errorMessage en un state para mostrrlo en el html
-        props.sendMessage({content:errorMessage}, "severity")
+        props.sendMessage({content:errorMessage}, "warning")
       }
     }
     )
@@ -112,9 +110,9 @@ function SignUpForm(props) {
                 openTo="year"
                 minDate={dayjs('1922-00-00')}
                 views={['year', 'month', 'day']}
-                value={response}
+                value={response.dateOfBirth}
                 onChange={(newResponse) => {
-      setResponse(newResponse);
+      setResponse({...response, dateOfBirth:dayjs(newResponse).format('YYYY-MM-DD')});
     }}
                 renderInput={(params) => <TextField {...params} />}
               />

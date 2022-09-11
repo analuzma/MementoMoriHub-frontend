@@ -18,7 +18,7 @@ const AuthPage = (props) => {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://unsplash.com/photos/rqWoB4LFgmc)',
+            backgroundImage: 'url(../../public/darkwaves.jpg)',
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

@@ -8,7 +8,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const baseURL = isProduction  ? "https://memento-mori-hub.herokuapp.com/api" : "http://localhost:5005/api";
 
 export const api = axios.create({
-    baseURL:"https://memento-mori-hub.herokuapp.com/api",
+    baseURL,
     withCredentials:true,
     timeout:10000
 })
