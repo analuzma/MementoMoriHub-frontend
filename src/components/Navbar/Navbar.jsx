@@ -18,8 +18,8 @@ const pages = [
       path: '/journal'
     },
       {
-      name: 'Resources',
-      path: '/resources'
+      name: 'quotes',
+      path: '/quotes'
     },
       {
       name: 'wisdom',
