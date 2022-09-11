@@ -9,7 +9,6 @@ import { Navbar} from "./components";
 import SnackbarCustom from "./components/SnackbarCustom/SnackbarCustom"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { logoutWs } from './services/auth-ws';
 
 const darkTheme = createTheme({
   palette: {
