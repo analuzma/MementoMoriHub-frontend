@@ -9,6 +9,7 @@ import { Navbar} from "./components";
 import SnackbarCustom from "./components/SnackbarCustom/SnackbarCustom"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const darkTheme = createTheme({
   palette: {
@@ -51,7 +52,7 @@ function sendMessage(message, severity){
   }, [])
 
   if (isLoading){
-    return <div>Loading...</div>
+    return <div><CircularProgress color="inherit" /></div>
   }
 
   return (

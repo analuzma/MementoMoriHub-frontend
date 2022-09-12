@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useNavigate } from "react-router-dom";
 import {AppBar, Box, Toolbar, IconButton, Typography, Menu, MenuItem, Container, Avatar, Button, Tooltip} from '@mui/material/'
 import MenuIcon from '@mui/icons-material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
 import LoginIcon from '@mui/icons-material/Login';
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -57,12 +56,10 @@ const Navbar = ({user, setUser, sendMessage}) => {
     navigate("/");
   };
 
-
   return (
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar variant="dense" disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
           <Typography
             variant="h6"
@@ -78,7 +75,7 @@ const Navbar = ({user, setUser, sendMessage}) => {
               textDecoration: 'none',
             }}
             >
-            MEMENTO MORI HUB
+            💀MEMENTO MORI HUB
           </Typography></Link>
         
             { user ?
@@ -121,7 +118,6 @@ const Navbar = ({user, setUser, sendMessage}) => {
             </Menu>
           </Box></>
           : <></> }
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><Typography
             variant="h5"
             noWrap
@@ -129,21 +125,21 @@ const Navbar = ({user, setUser, sendMessage}) => {
               mr: 2,
               display: { xs: 'flex', md: 'none' },
               flexGrow: 1,
-              fontFamily: 'warnock',
+              fontFamily: 'warnock-pro',
               fontWeight: 700,
               letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
-            MEMENTO MORI HUB
+            💀MEMENTO MORI HUB
           </Typography></Link>
             {/* if there is an active user */}
             {user?
           <>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map(({name, path, index}) => (
-              <Link key={index} to={path}  style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link key={index} to={path} style={{ textDecoration: 'none', color: 'inherit' }}>
               <Button
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
