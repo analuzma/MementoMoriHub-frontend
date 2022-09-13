@@ -63,10 +63,9 @@ export default function SignInForm(props) {
         props.sendMessage("Welcome back!", "severity")
         navigate('/profile')
         return;
-      }else{
-        //pueden guardar el errorMessage en un state para mostrrlo en el html
-        props.sendMessage({content:errorMessage}, "severity")
-      }
+      } else {
+          props.sendMessage(errorMessage, "warning")
+        }
     }
     )
   }
@@ -128,7 +127,7 @@ export default function SignInForm(props) {
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link to="/signup" variant="body2" style={{ textDecoration: 'none', color: 'inherit'}}>
-                Don't have an account?<Button>Sign Up</Button>
+                Don't have an account?    <Button variant="outlined">Sign Up</Button>
               </Link>
             </Grid>
           </Grid>

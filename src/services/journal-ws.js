@@ -1,5 +1,5 @@
 import { api } from "./api";
-import { successStatus, internalServerError } from "../utils/clear-res";
+import { successStatus, internalServerError } from "../utils/format-response";
 
 //all journal entries by user
 export const getJournalEntriesByUserWs = async (data) => {

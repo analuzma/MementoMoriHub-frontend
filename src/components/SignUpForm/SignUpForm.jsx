@@ -74,7 +74,7 @@ function SignUpForm(props) {
         return;
       }else{
         //pueden guardar el errorMessage en un state para mostrrlo en el html
-        props.sendMessage({content:errorMessage}, "warning")
+        props.sendMessage(errorMessage, "warning")
       }
     }
     )
@@ -108,7 +108,7 @@ function SignUpForm(props) {
                 inputFormat="DD/MM/YYYY"
                 label="Date of Birth"
                 openTo="year"
-                minDate={dayjs('1922-00-00')}
+                minDate={dayjs('1943-00-00')}
                 views={['year', 'month', 'day']}
                 value={response.dateOfBirth}
                 onChange={(newResponse) => {
@@ -169,13 +169,7 @@ function SignUpForm(props) {
                 onChange={handleChange}
               />
             </Grid>
-              {/* checkbox  input
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid> */}
+
           </Grid>
           <Button
             type="submit"
@@ -189,7 +183,7 @@ function SignUpForm(props) {
           <Grid container justifyContent="flex-end">
             <Grid item>
               <Link to="/signin" variant="body2" style={{ textDecoration: 'none', color: 'inherit',}}>
-                Already have an account? <Button>Sign in</Button>
+                Already have an account?   <Button variant="outlined">Sign in</Button>
               </Link>
             </Grid>
           </Grid>

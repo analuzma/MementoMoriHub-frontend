@@ -9,8 +9,8 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 const SnackbarCustom =(props)=> {
 
   return (
-      <Snackbar open={props.open} autoHideDuration={6000} onClose={props.handleClose}>
-        <Alert onClose={props.handleClose} severity="success" sx={{ width: '100%' }}>
+      <Snackbar open={props.open} autoHideDuration={5000} onClose={props.handleClose}>
+        <Alert onClose={props.handleClose} severity={props.severity} sx={{ width: '100%' }}>
         {props.message}
         </Alert>
       </Snackbar>

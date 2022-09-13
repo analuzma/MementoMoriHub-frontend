@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Container, Paper, Box, Stack, Grid} from '@mui/material/';
 import dayjs from 'dayjs';
-import { Countdown, FloatingEdit, BadgeAvatars } from '../components';
-import {Link} from 'react-router-dom'
+import { Countdown, FloatingEdit, BadgeAvatars, EditProfile } from '../components';
 
-const ProfilePage = ({user}) => {
+const ProfilePage = ({user, authentication, sendMessage}) => {
+//edit profile
+  // const [editingProfile, setEditingProfile] = useState(true);
 //users dates
 const dateOfBirth = dayjs(user.dateOfBirth);
 const dateOfDeath = dayjs(dateOfBirth).add(80, 'year')
@@ -67,10 +68,6 @@ const percentageAlive = String(100-percentageDead).slice(0, 2)
     <b style={{color:"#44B600", fontSize:"35px"}}>{weeksLeftToLive} </b><p>weeks</p>
     <b style={{color:"#44B600", fontSize:"35px"}}>{daysLeftToLive}</b><>days</> 
     <p>You have lived {percentageAlive}% of your life already and the other {percentageDead}% you might never have it</p>
-
-
-
-
         </Paper>
 <Countdown {...user}/>
           <Box
@@ -95,7 +92,12 @@ That means, your life is made up of (hopefully) 4,174 weeks.
             </Grid>
           </Grid>
    </Container>
-<Link to="/calendar"><FloatingEdit></FloatingEdit></Link>
+
+<FloatingEdit />
+
+  <EditProfile {...{user, authentication, sendMessage}}></EditProfile>
+
+
     </div>
   )
 }

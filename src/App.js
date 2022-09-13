@@ -5,7 +5,6 @@ import routes from "./config/routes";
                                     //useNavigate
 import { Routes, Route, useNavigate} from "react-router-dom";
 import { Navbar} from "./components";
-// import { logoutWs } from "./services/auth-ws";
 import SnackbarCustom from "./components/SnackbarCustom/SnackbarCustom"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,7 +15,6 @@ const darkTheme = createTheme({
     mode: 'dark',
   },
 });
-
 
 function App() {
   const navigate = useNavigate()

@@ -45,14 +45,11 @@ const Navbar = ({user, setUser, sendMessage}) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-  // console.log("props", props)
 
     const handleLogout = () => {
-    console.log("cerraste sesion")
     setUser(null)
     localStorage.removeItem("user")
-    //ver porque no trae propiedades y extrerlas
-    sendMessage("You have logged out", "success")
+    sendMessage("You have logged out. See you next time...hopefully", "error")
     navigate("/");
   };
 
