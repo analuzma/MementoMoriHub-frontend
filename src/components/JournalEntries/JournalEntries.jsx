@@ -28,9 +28,7 @@ const JournalEntries = (props) => {
   const findJournalEntry= async () => {
     const hasEntries = await getJournalEntriesByUserWs(journalEntries);
     if (hasEntries) {
-      console.log("antes",journalEntries)
       setJournalEntries(hasEntries.data.journalEntries);
-     console.log("dsps",journalEntries)
       setIsLoading(false);
     }
   };
@@ -98,6 +96,7 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
           <>
           { journalEntries ==0 ?(
             <>
+                {/* QUOTE TO STYLE */}
             <h2><b>Our life is what our toughts make it </b>- Marcus Aurelius</h2>
           <Grid container justifyContent="flex-end">
             <Button  onClick={handleCreateJournalEntry}>

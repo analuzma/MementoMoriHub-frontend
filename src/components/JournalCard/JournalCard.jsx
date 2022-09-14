@@ -48,7 +48,7 @@ const JournalCard = ({journalEntry, _id, title, description, coverUrl, isFeature
               <StyledTableCell component="th" scope="row">
                 {date}
               </StyledTableCell>
-              <StyledTableCell align="left">{description}</StyledTableCell>
+              <StyledTableCell align="left">{title}</StyledTableCell>
               <StyledTableCell align="right">{isFeatured? <StarIcon/>:null}</StyledTableCell>
             </StyledTableRow>
 </>
