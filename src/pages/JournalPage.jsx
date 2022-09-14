@@ -1,9 +1,12 @@
 import React from 'react'
+import { JournalEntries } from '../components'
 
-const JournalPage = (props) => {
+const JournalPage = ({user, sendMessage}) => {
 
   return (
-    <div><h1>{props.user.firstName}'s journal</h1></div>
+    <div><h1>{user.firstName}'s journal</h1>
+    <JournalEntries></JournalEntries>
+    </div>
   )
 }
 

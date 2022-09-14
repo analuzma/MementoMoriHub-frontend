@@ -41,7 +41,7 @@ export const updateJournalEntryWs = async (id, data) => {
 //delete journal entry
 export const deleteJournalEntryWs = async (id, data) => {
   try {
-    const res = await api.delete((`/journal/${id}/delete`, data);
+    const res = await api.delete(`/journal/${id}/delete`, data);
     return successStatus(res);
   } catch (error) {
     return internalServerError(error);

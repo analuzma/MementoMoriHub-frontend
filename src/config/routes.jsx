@@ -1,5 +1,5 @@
 //importar mis pages
-import {AuthPage, ProfilePage, CalendarPage, JournalPage, QuotesPage, WisdomPage}  from '../pages'
+import {AuthPage, ProfilePage, CalendarPage, JournalPage, JournalWritePage, JournalDetailPage, QuotesPage, WisdomPage}  from '../pages'
 
 const routes = (props)=>{
     //<Route path="/" element={componente} />
@@ -27,6 +27,14 @@ const routes = (props)=>{
                 {
             path:"/journal",
             element:<JournalPage {...props}/>
+        },
+                {
+            path:"/journal/write",
+            element:<JournalWritePage {...props}/>
+        },
+                {
+            path:"/journal/:id",
+            element:<JournalDetailPage {...props}/>
         },
                 {
             path:"/quotes",
