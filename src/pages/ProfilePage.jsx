@@ -4,8 +4,7 @@ import dayjs from 'dayjs';
 import { Countdown, FloatingEdit, BadgeAvatars, EditProfile } from '../components';
 
 const ProfilePage = ({user, authentication, sendMessage}) => {
-//edit profile
-  // const [editingProfile, setEditingProfile] = useState(true);
+
 //users dates
 const dateOfBirth = dayjs(user.dateOfBirth);
 const dateOfDeath = dayjs(dateOfBirth).add(80, 'year')
@@ -50,6 +49,12 @@ function percentage(currentWeeks, totalWeeks) {
 const percentageDead = String(percentage(currentWeeks, totalWeeks)).slice(0, 2)
 const percentageAlive = String(100-percentageDead).slice(0, 2)
 
+//edit profile
+  const [editingProfileShown, setEditingProfileShown] = useState(true);
+  const editHandler = () => {
+    setEditingProfileShown(!editingProfileShown);
+  };
+
 
   return (
     <div>
@@ -67,9 +72,11 @@ const percentageAlive = String(100-percentageDead).slice(0, 2)
     <b style={{color:"#44B600", fontSize:"35px"}}>{monthLeftToLive} </b><p>months</p>
     <b style={{color:"#44B600", fontSize:"35px"}}>{weeksLeftToLive} </b><p>weeks</p>
     <b style={{color:"#44B600", fontSize:"35px"}}>{daysLeftToLive}</b><>days</> 
-    <p>You have lived {percentageAlive}% of your life already and the other {percentageDead}% you might never have it</p>
+    <p>You have lived <b>{percentageAlive}%</b> of your life already and the other <b>{percentageDead}% </b> you might never have it</p>
         </Paper>
-<Countdown {...user}/>
+
+      {editingProfileShown ? (
+       <><Countdown {...user}/>
           <Box
       sx={{
              display: 'flex',
@@ -88,14 +95,16 @@ const percentageAlive = String(100-percentageDead).slice(0, 2)
 <br />
                 *The average human lifespan nowadays is 80 years.
 That means, your life is made up of (hopefully) 4,174 weeks.
-
-            </Grid>
-          </Grid>
+   </Grid>
+             </Grid>
+</> 
+      ) : (
+ <EditProfile {...{user, authentication, sendMessage}}></EditProfile>
+ )}
+  
    </Container>
+<div onClick={editHandler}><FloatingEdit /></div>
 
-<FloatingEdit />
-
-  <EditProfile {...{user, authentication, sendMessage}}></EditProfile>
 
 
     </div>

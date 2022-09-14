@@ -1,6 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react'
 import { styled } from '@mui/material/styles';
-import {Paper, Grid, Box} from '@mui/material/';
+import {Paper, Grid} from '@mui/material/';
 import dayjs from 'dayjs';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -16,6 +16,7 @@ const Countdown = (user) => {
   const [timerHours, setTimerHours]=useState('00')
   const [timerMinutes, setTimerMinutes]=useState('00')
   const [timerSeconds, setTimerSeconds]=useState('00')
+  const [isLoading, setIsLoading] = useState(true);
 
   let interval = useRef();
 
@@ -74,7 +75,7 @@ const dod = dayjs(dob).add(80, 'year')
 >
       <Grid container spacing={3} columns={15}>
         <Grid item xs={5}>
-          <Item>{timerHours}<br />Hours</Item>
+          <Item>{timerHours}<br />Hours</Item> 
         </Grid>
         <Grid item xs={5}>
           <Item>{timerMinutes}<br />Minutes</Item>

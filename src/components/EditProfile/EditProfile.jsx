@@ -71,18 +71,18 @@ const EditProfile = ( {user, authentication, sendMessage} ) => {
 
   return (
     <>
-    <Container maxWidth="sm" >
+        <Paper sx={{p:"1px", mt:"5px"}}>
       <Box
         sx={{
-          maxWidth: 400,
           display: "flex",
-        alignItems:"center", justifyContent:"center", 
+          alignItems:"center",
+          justifyContent:"center", 
           flexDirection: "column",
           mt: 5,
         }}
       >
-        <Paper sx={{ maxWidth: 400, p:"20px" }}>
-          <form onSubmit={handleFormSubmission}>
+        <Paper sx={{ maxWidth: 600, p:"20px" }}>
+          <form onSubmit={handleFormSubmission} >
             <Typography
               variant="h5"
               gutterBottom
@@ -168,7 +168,7 @@ const EditProfile = ( {user, authentication, sendMessage} ) => {
           </form>
         </Paper>
       </Box>
-      </Container>
+      </Paper>
     </>
   );
 };
