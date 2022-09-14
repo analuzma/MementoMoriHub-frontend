@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { styled } from '@mui/material/styles';
-import { CircularProgress, TableCell, tableCellClasses, TableRow, TableContainer, Paper, Table, TableHead, Container, TableBody } from "@mui/material";
+import { Grid, CircularProgress, TableCell, tableCellClasses, TableRow, TableContainer, Paper, Table, TableHead,Button, TableBody } from "@mui/material";
+
 import { getJournalEntriesByUserWs } from "../../services/journal-ws"
 import { useNavigate } from "react-router-dom";
-import {} from "@mui/material/";
-import JournalCard from "../JournalCard/JournalCard";
+import {JournalCard} from "../JournalCard";
+import {FloatingAdd} from "../FloatingAdd";
 
 //table looks
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -42,17 +43,31 @@ const JournalEntries = (props) => {
   function userJournalsList() {
    return [...journalEntries].reverse().map((journal, i) => {
      return (
-          <JournalCard key={i} title={journal.title} description={journal.description} coverUrl={journal.coverUrl} isFeatured={journal.isFeatured} date={journal.date}></JournalCard>
+          <JournalCard key={i} {...journal}></JournalCard>
      );
    });
  }
 
+  const handleCreateJournalEntry = () => {
+    navigate(`/journal/write`);
+  };
+
+
   return (
     <>
-<p>JournalEntries</p>
-<Container maxWidth="fixed" >
-<Paper elevation={6} sx={{  display:"flex", 
+<p>Journal entries from newest to oldest</p>
+<Grid
+  item xs={12}
+  container
+  direction="column"
+  justifyContent="center"
+  alignItems="center"
+>
+<Paper elevation={6} item sx={{  display:"flex", 
 alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", width:"80%"}} > 
+        <div onClick={handleCreateJournalEntry}>
+          <FloatingAdd mini = {true}  />
+        </div>
         {!isLoading && journalEntries.length > 0 ? 
         (
           <>
@@ -65,19 +80,39 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
             <StyledTableCell align="left"></StyledTableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody component='div'>
               {userJournalsList()}
             </TableBody>
           </Table>
         </TableContainer>
+          <br />
+          <Grid container justifyContent="flex-end">
+            <Button  onClick={handleCreateJournalEntry}>
+              Write new entry
+            </Button>
+          </Grid>
+    
           </>
         ) : (
           
-          <p><CircularProgress/></p>
+          <>
+          { journalEntries ==0 ?(
+            <>
+            <h2><b>Our life is what our toughts make it </b>- Marcus Aurelius</h2>
+          <Grid container justifyContent="flex-end">
+            <Button  onClick={handleCreateJournalEntry}>
+              Write your first entry
+            </Button>
+          </Grid>
+            </>
+          ):(
+            <><CircularProgress/></>
+          )}
+          </>
         )}
 
         </Paper>
-        </Container>
+        </Grid>
     </>
   )
 }
