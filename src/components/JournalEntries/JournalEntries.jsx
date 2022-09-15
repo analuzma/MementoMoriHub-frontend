@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { styled } from '@mui/material/styles';
-import { Grid, CircularProgress, TableCell, tableCellClasses, TableRow, TableContainer, Paper, Table, TableHead,Button, TableBody } from "@mui/material";
-
+import { Grid, Box,  CircularProgress, TableCell, tableCellClasses, TableRow, TableContainer, Paper, Table, TableHead,Button, TableBody } from "@mui/material";
+import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { getJournalEntriesByUserWs } from "../../services/journal-ws"
 import { useNavigate } from "react-router-dom";
 import {JournalCard} from "../JournalCard";
@@ -54,15 +54,16 @@ const JournalEntries = (props) => {
   return (
     <>
 <p>Journal entries from newest to oldest</p>
-<Grid
-  item xs={12}
-  container
-  direction="column"
-  justifyContent="center"
-  alignItems="center"
->
-<Paper elevation={6} item sx={{  display:"flex", 
-alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", width:"80%"}} > 
+      <Box
+        sx={{
+          display: "flex",
+          alignItems:"center",
+          justifyContent:"center", 
+          flexDirection: "column",
+          mt: 5,
+        }}
+      >
+        <Paper sx={{ maxWidth: 1000, p:"20px" }}>
         <div onClick={handleCreateJournalEntry}>
           <FloatingAdd mini = {true}  />
         </div>
@@ -70,12 +71,12 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
         (
           <>
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+      <Table sx={{ minWidth: 500, maxWidth:1500 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>DATE</StyledTableCell>
-            <StyledTableCell align="left">TITLE</StyledTableCell>
-            <StyledTableCell align="left"></StyledTableCell>
+            <StyledTableCell sx={{fontFamily:"warlock", fontSize:20}}>DATE</StyledTableCell>
+            <StyledTableCell align="left"  sx={{fontFamily:"warlock",fontSize:20}}>TITLE</StyledTableCell>
+            <StyledTableCell align="left"><StarOutlineIcon/></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody component='div'>
@@ -111,7 +112,7 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
         )}
 
         </Paper>
-        </Grid>
+        </Box>
     </>
   )
 }

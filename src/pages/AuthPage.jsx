@@ -5,7 +5,6 @@ import Grid from '@mui/material/Grid';
 import { SignUpForm, SignInForm} from '../components/'
 import { useLocation} from "react-router-dom";
 
-
 const AuthPage = (props) => {
 
     const location = useLocation()

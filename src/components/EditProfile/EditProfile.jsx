@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { styled } from "@mui/material/styles";
 import { editUserWs } from "../../services/user-ws";
+import { deleteUserWs } from "../../services/user-ws";
 import { uploadImageWs } from "../../services/upload-ws";
-import {Typography, Avatar, Box, IconButton, Paper, Button, TextField, Container} from "@mui/material";
+import {Typography, Avatar, Box, Grid, IconButton, Paper, Button, TextField} from "@mui/material";
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import { Navigate } from "react-router-dom";
 
 
-const EditProfile = ( {user, authentication, sendMessage} ) => {
+const EditProfile = ( {user, setUser, authentication, sendMessage, editHandler} ) => {
   const [values, setValues] = useState({
     imageUrl: user.imageUrl,
     firstName: user.firstName,
@@ -54,6 +56,7 @@ const EditProfile = ( {user, authentication, sendMessage} ) => {
     try {
       editUserWs(values).then((response) => {
         if (response.status) {
+          editHandler()
           sendMessage("Profile updated!", "success")
           authentication(response.data.user)
           setError(null);
@@ -68,6 +71,20 @@ const EditProfile = ( {user, authentication, sendMessage} ) => {
       setError(error.errorMessage);
     }
   };
+  //not working yet
+  //   const handleDeleteAccount = async (e) => {
+  //   deleteUserWs(user)
+  //   .then(() => {
+  //   console.log(user)
+  //   setUser(null)
+  //   localStorage.removeItem("user")
+  //   sendMessage("You deleted your account", "error")
+  //   Navigate("/")
+  //     })
+  //     .catch((err) => {
+  //       setError(err);
+  //     });
+  // };
 
   return (
     <>
@@ -81,13 +98,13 @@ const EditProfile = ( {user, authentication, sendMessage} ) => {
           mt: 5,
         }}
       >
-        <Paper sx={{ maxWidth: 600, p:"20px" }}>
+        <Paper sx={{ maxWidth: 600, p:"px" }}>
           <form onSubmit={handleFormSubmission} >
             <Typography
               variant="h5"
               gutterBottom
               component="div"
-              sx={{ mb: 3 }}
+              sx={{ mb: 3, fontFamily:"warlock" }}
             >
               Edit Profile
             </Typography>
@@ -150,14 +167,24 @@ const EditProfile = ( {user, authentication, sendMessage} ) => {
             <div>
             </div>
             <Button type="submit" variant="contained">
-              EDIT
+              EDIT PROFILE
             </Button>
+            {/* NOT WORKING YET
+            <div> 
+                <Grid  container justifyContent="flex-end" onClick={handleDeleteAccount}>
+            <Button color="error">
+              DELETE ACCOUNT
+            </Button>
+          </Grid>
+          </div> */}
             {error ? (
+              <>
               <Box sx={{ m: 2 }}>
                 <Typography variant="body2" color="error">
                   {error}
                 </Typography>
               </Box>
+                </>       
             ) : (
               <Box sx={{ m: 2 }}>
                 <Typography variant="body2" color="primary">

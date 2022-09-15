@@ -6,6 +6,7 @@ import LoginIcon from '@mui/icons-material/Login';
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link } from "react-router-dom";
+import skull from "./skull.png"
 
 const pages = [
     {
@@ -46,6 +47,11 @@ const Navbar = ({user, setUser, sendMessage}) => {
     setAnchorElUser(null);
   };
 
+  const handleRedirectHome = () => {
+    navigate("/")
+  };
+
+
     const handleLogout = () => {
     setUser(null)
     localStorage.removeItem("user")
@@ -57,7 +63,7 @@ const Navbar = ({user, setUser, sendMessage}) => {
     <AppBar position="sticky">
       <Container maxWidth="xl">
         <Toolbar variant="dense" disableGutters>
-          <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <div onClick={handleRedirectHome}>
           <Typography
             variant="h6"
             noWrap
@@ -72,9 +78,10 @@ const Navbar = ({user, setUser, sendMessage}) => {
               textDecoration: 'none',
             }}
             >
-            💀MEMENTO MORI HUB
-          </Typography></Link>
-        
+            <img src={skull} style={{width:"25px", height:"25px", marginRight:"10px", marginTop:"3px"}}></img>
+             Memento Mori Hub
+          </Typography>
+              </div>
             { user ?
               <>
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -129,7 +136,8 @@ const Navbar = ({user, setUser, sendMessage}) => {
               textDecoration: 'none',
             }}
           >
-            💀MEMENTO MORI HUB
+           <img src={skull} style={{width:"25px", height:"25px", marginRight:"10px", marginTop:"3px"}}></img>
+             Memento Mori Hub
           </Typography></Link>
             {/* if there is an active user */}
             {user?

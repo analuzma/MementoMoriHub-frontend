@@ -59,7 +59,7 @@ const percentageAlive = String(100-percentageDead).slice(0, 2)
   return (
     <div>
       <br />
-              <Container maxWidth="sm" >
+        <Container maxWidth="sm" >
         <Paper elevation={6} sx={{ height: '100 vh' ,  display:"flex", 
         alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px"}} > 
 
@@ -99,7 +99,7 @@ That means, your life is made up of (hopefully) 4,174 weeks.
              </Grid>
 </> 
       ) : (
- <EditProfile {...{user, authentication, sendMessage}}></EditProfile>
+ <EditProfile {...{user, authentication, sendMessage, editHandler}}></EditProfile>
  )}
   
    </Container>
