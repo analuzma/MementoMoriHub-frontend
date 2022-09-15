@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import { styled } from '@mui/material/styles';
 import { Grid, Box,  CircularProgress, TableCell, tableCellClasses, TableRow, TableContainer, Paper, Table, TableHead,Button, TableBody } from "@mui/material";
-import StarOutlineIcon from '@mui/icons-material/StarOutline';
 import { getJournalEntriesByUserWs } from "../../services/journal-ws"
 import { useNavigate } from "react-router-dom";
 import {JournalCard} from "../JournalCard";
 import {FloatingAdd} from "../FloatingAdd";
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
+import BookmarksIcon from '@mui/icons-material/Bookmarks';
 
 //table looks
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -71,12 +72,12 @@ const JournalEntries = (props) => {
         (
           <>
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 1000, maxWidth:1000 }} aria-label="customized table">
+      <Table sx={{ minWidth: 800, maxWidth:1000 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell sx={{fontFamily:"warlock", fontSize:20}}>DATE</StyledTableCell>
             <StyledTableCell align="left"  sx={{fontFamily:"warlock",fontSize:20}}>TITLE</StyledTableCell>
-            <StyledTableCell align="left"><StarOutlineIcon/></StyledTableCell>
+            <StyledTableCell align="left"><BookmarksIcon/></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody component='div'>
@@ -87,7 +88,7 @@ const JournalEntries = (props) => {
           <br />
           <Grid container justifyContent="flex-end">
             <Button  onClick={handleCreateJournalEntry}>
-              Write new entry
+              Write new entry <HistoryEduIcon/>
             </Button>
           </Grid>
     

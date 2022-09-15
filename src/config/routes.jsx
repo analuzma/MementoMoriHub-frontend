@@ -1,12 +1,12 @@
 //importar mis pages
-import {AuthPage, ProfilePage, CalendarPage, JournalPage, JournalWritePage, JournalDetailPage, QuotesPage, WisdomPage}  from '../pages'
+import {AuthPage, ProfilePage, CalendarPage, JournalPage, JournalWritePage,HomePage, JournalDetailPage, QuotesPage, WisdomPage}  from '../pages'
 
 const routes = (props)=>{
     //<Route path="/" element={componente} />
     return [
         {
             path: "/", //Homepage
-            element:<h1>Remember you will die</h1>
+            element:<HomePage {...props}/>
         },
         {
             path:"/signin",

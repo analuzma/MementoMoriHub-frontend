@@ -2,8 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { styled } from '@mui/material/styles';
 import { TableCell, tableCellClasses, TableRow,  } 
 from "@mui/material";
-import { Link } from "react-router-dom";
-import StarIcon from '@mui/icons-material/Star';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -46,12 +45,11 @@ const JournalCard = ({journalEntry, _id, title, description, coverUrl, isFeature
   return (<>
             <StyledTableRow  key={date} onClick={handleDetail}>
               <StyledTableCell component="th" scope="row">
-                {date}
-              </StyledTableCell>
+               {date}</StyledTableCell>
               <StyledTableCell align="left">{title}</StyledTableCell>
-              <StyledTableCell align="right">{isFeatured? <StarIcon/>:null}</StyledTableCell>
+              <StyledTableCell align="left">{isFeatured? <BookmarkIcon/>:null}</StyledTableCell>
             </StyledTableRow>
-</>
+            </>
 
   )
 }

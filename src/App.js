@@ -1,8 +1,6 @@
 import { useEffect, useState} from "react";
 import "./App.css";
-//importar las rutas a utilizar
 import routes from "./config/routes";
-                                    //useNavigate
 import { Routes, Route, useNavigate} from "react-router-dom";
 import { Navbar} from "./components";
 import SnackbarCustom from "./components/SnackbarCustom/SnackbarCustom"

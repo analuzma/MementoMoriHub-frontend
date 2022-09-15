@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import dayjs from 'dayjs'
 import { styled } from "@mui/material/styles";
-import {Typography, Checkbox, Box, IconButton, Paper, Button, TextField, Container, Grid, TextareaAutosize, FormControlLabel } from "@mui/material";
+import {Typography, Checkbox, Box,Paper, Button, TextField, Container, Grid, Stack, FormControlLabel } from "@mui/material";
   import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import {uploadImageWs} from "../../services/upload-ws"
 import {newJournalEntryWs} from "../../services/journal-ws"
@@ -98,15 +98,17 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
   {/* QUOTE TO STYLE */}
   I will keep constant watch over myself and - most importantly - will put each day up for review. - Seneca The Younger
 </Typography>
+ 
           <form onSubmit={handleFormSubmission} >
-            {/* entry */}
+            {/* title */}
+            <Stack direction="column" alignItems="center" spacing={4}>
             <TextField
               id="outlined-basic"
               label="Write your entry's title"
               name="title"
               variant="outlined"
               onChange={handleChange}
-              sx={{ width: 400, mb: 2, backgroundColor:"black", color:"white" }}
+              sx={{ width: 400, mb:1, backgroundColor:"black", color:"white" }}
             />
             {/* description */}
             <TextField
@@ -121,14 +123,16 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
               style={{ width: 400, fontFamily:'warnock-pro', fontSize:20, color:"white", backgroundColor:"black", p:5 }}
             />
             {/*isFeatured*/}
-                  <FormControlLabel
-          value="isFeatured"
-          control={<Checkbox {...label} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />} />}
-          label="Featured?"
-          labelPlacement="start"
-          onChange={(e)=>setValues(prevState=>({...prevState, isFeatured:e.target.checked}))}
-        />
-            <Grid container justifyContent="end" paddingTop={3} paddingRight={2}>
+           <Grid container justifyContent="end" paddingTop={0} paddingRight={2}>
+                      <FormControlLabel
+              value="isFeatured"
+              control={<Checkbox {...label} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />} />}
+              label="Feature this entry?"
+              labelPlacement="start"
+              onChange={(e)=>setValues(prevState=>({...prevState, isFeatured:e.target.checked}))}
+            />
+          </Grid>
+            <Grid container justifyContent="end" paddingTop={0} paddingRight={2}>
             <Button type="submit" variant="contained">
               SUBMIT JOURNAL ENTRY <HistoryEduIcon/>
             </Button>
@@ -146,6 +150,7 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
                 </Typography>
               </Box>
             )}
+            </Stack>
           </form>
         </Paper>
       </Grid>
