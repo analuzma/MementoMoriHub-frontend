@@ -1,4 +1,4 @@
-export {default as AuthPage} from './AuthPage';
+export {default as AuthPage} from './AuthPage.jsx';
 export {default as ProfilePage} from './ProfilePage';
 export {default as CalendarPage} from './CalendarPage';
 export {default as JournalPage} from './JournalPage';

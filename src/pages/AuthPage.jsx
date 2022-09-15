@@ -2,22 +2,23 @@ import * as React from 'react';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import { SignUpForm, SignInForm} from '../components/'
+import { SignUpForm, SignInForm} from '../components'
 import { useLocation} from "react-router-dom";
+import darkWavesBg from "../img/gradientBg.jpg"
 
 const AuthPage = (props) => {
 
-    const location = useLocation()
+  const location = useLocation()
 
   return (
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '96vh' }}>
         <Grid
           item
           xs={false}
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(../../public/darkwaves.jpg)',
+            backgroundImage: `url(${darkWavesBg})`,
             backgroundRepeat: 'no-repeat',
             backgroundColor: (t) =>
               t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],

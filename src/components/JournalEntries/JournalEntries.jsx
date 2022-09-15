@@ -71,7 +71,7 @@ const JournalEntries = (props) => {
         (
           <>
       <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500, maxWidth:1500 }} aria-label="customized table">
+      <Table sx={{ minWidth: 1000, maxWidth:1000 }} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell sx={{fontFamily:"warlock", fontSize:20}}>DATE</StyledTableCell>

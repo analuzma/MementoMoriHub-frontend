@@ -16,7 +16,7 @@ const AddJournalEntry = (sendMessage) => {
     title: "",
     description: "",
     date: (dayjs()),
-    // isFeatured: false,
+    isFeatured: false,
     // coverUrl: ""
   });
 
@@ -126,6 +126,7 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
           control={<Checkbox {...label} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />} />}
           label="Featured?"
           labelPlacement="start"
+          onChange={(e)=>setValues(prevState=>({...prevState, isFeatured:e.target.checked}))}
         />
             <Grid container justifyContent="end" paddingTop={3} paddingRight={2}>
             <Button type="submit" variant="contained">

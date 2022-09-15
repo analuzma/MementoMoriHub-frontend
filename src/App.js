@@ -9,11 +9,16 @@ import SnackbarCustom from "./components/SnackbarCustom/SnackbarCustom"
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import CircularProgress from '@mui/material/CircularProgress';
+import { deepPurple } from "@mui/material/colors";
 
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
-  },
+     primary: {
+      // Purple and green play nicely together.
+      main: deepPurple[300],
+    }, 
+  }
 });
 
 function App() {

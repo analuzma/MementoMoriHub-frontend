@@ -1,45 +1,48 @@
-import { useState, useEffect } from "react";
-import {getJournalEntriesByUserWs, deleteJournalEntryWs} from "../../services/journal-ws"
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  IconButton,
-  Typography,
-} from "@mui/material";
-import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import { useNavigate } from "react-router-dom";
+// import React, {useState} from 'react'
+// import {Paper, Grid} from "@mui/material";
+// import {useNavigate} from 'react-router-dom'
+// import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+// import BookmarkIcon from '@mui/icons-material/Bookmark';
+// import {FloatingEdit} from "../../components"
+// import {getJournalEntryWs} from "../../services/journal-ws"
 
-const JournalEntry = () => {
-  // const navigate = useNavigate();
-  // const [isLoading, setIsLoading] = useState(true);
-//   const [userJournals, setUserJournals] = useState([]);
-//   //get user's entries
-//   const findUserEntries = async () => {
-//     const  hasEntries= await getJournalEntriesByUserWs();
+//   const JournalEntry = (props) => {
+
+//     const navigate = useNavigate();
+//     const [isLoading, setIsLoading] = useState(true);
+
+//       //get user specific journal entry
+//   const findJournalEntry= async () => {
+//     const hasEntries = await getJournalEntryWs(journalEntry);
 //     if (hasEntries) {
-//       setUserJournals(hasEntries.data.journalEntry);
+//       setJournalEntries(hasEntries.data.journalEntries);
 //       setIsLoading(false);
-//       console.log("journal",hasEntries.data.journalEntry)
-//     } else {
-//       console.log("no entries found")
 //     }
 //   };
 
 //   useEffect(() => {
-//       findUserEntries()
-//       .then(data=>{
-//         console.log(data)
-//       })
+//     findJournalEntry();
 //   }, []);
 
-  return (
-    <div>Journal entry</div>
-  )
-}
+//   return (
 
-export default JournalEntry
+//     <>
+//     <FloatingEdit/>
+//     <div>Journal entry</div>
+//     <Grid
+//       item xs={12}
+//       container
+//       direction="column"
+//       justifyContent="center"
+//       alignItems="center"
+//     >
+//     <Paper elevation={6} item sx={{  display:"flex", 
+//     alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", width:"80%"}} > 
+
+//             </Paper>
+//       </Grid>
+//     </>
+//   )
+// }
+
+// export default JournalEntry
