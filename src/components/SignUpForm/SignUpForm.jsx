@@ -71,7 +71,6 @@ function SignUpForm(props) {
         props.authentication(data.user)
         props.sendMessage("You have signed up!", "success")
         navigate('/profile')
-        return;
       }else{
         //pueden guardar el errorMessage en un state para mostrrlo en el html
         props.sendMessage(errorMessage, "warning")

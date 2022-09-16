@@ -42,25 +42,25 @@ export default function SignInForm(props) {
   const { email, password } = response
 
     const handleChange = (e) => {
-    setResponse({
-      ...response,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
+      setResponse({
+        ...response,
+        [e.target.name]: e.target.value,
+      });
+    };
+    
+    const handleSubmit = async (e) => {
     e.preventDefault();
-    const credentials = {
+    const data = {
       email,
       password,
     };
 
-    loginWs(credentials)
+    loginWs(data)
     .then(res=>{
       const{ data,status,errorMessage} = res
       if (status){
         props.authentication(data.user)
-        props.sendMessage("Welcome back!", "severity")
+        props.sendMessage("Welcome back!", "success")
         navigate('/profile')
         return;
       } else {
