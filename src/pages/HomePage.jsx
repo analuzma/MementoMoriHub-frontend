@@ -35,9 +35,8 @@ const HomePage = () => {
             }}
           >
           
-          <h1>Remember You Must Die</h1>
-          <h2>You could leave life right now</h2>
-          <p>To <b>practice death</b> is to practice freedom: </p>
+          <h1 style={{color:"gold"}}>Remember You Must Die</h1>
+          <h2 style={{fontFamily:"warnick",color:"#DDD6F3"}}><b>Stoic Philosophy Toolkit: </b></h2>
     <Container maxWidth="sm" >
         <Paper elevation={1} sx={{ height: '100 vh' ,  display:"flex", 
         alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px"}} > 

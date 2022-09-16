@@ -22,8 +22,8 @@ const pages = [
       path: '/quotes'
     },
       {
-      name: 'Wisdom',
-      path: '/wisdom'
+      name: 'Countdown',
+      path: '/countdown'
     }];
 
 const Navbar = ({user, setUser, sendMessage}) => {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const WisdomPage = (props) => {
+const CountdownPage = (props) => {
 
   return (
     <div><h1>Stoic Wisdom</h1>
@@ -9,4 +9,4 @@ const WisdomPage = (props) => {
   )
 }
 
-export default WisdomPage
+export default CountdownPage
