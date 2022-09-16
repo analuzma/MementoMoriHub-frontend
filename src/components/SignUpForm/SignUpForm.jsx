@@ -104,7 +104,7 @@ function SignUpForm(props) {
                 disableFuture
                 id="dateOfBirth"
                 name="dateOfBirth"
-                inputFormat="DD/MM/YYYY"
+                inputFormat="MM/DD/YYYY"
                 label="Date of Birth"
                 openTo="year"
                 minDate={dayjs('1943-00-00')}

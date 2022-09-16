@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import { TableCell, tableCellClasses, TableRow,  } 
 from "@mui/material";
 import BookmarkIcon from '@mui/icons-material/Bookmark';
+import formatDate from '../../utils/format-date';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -41,7 +42,7 @@ const JournalCard = ({journalEntry, _id, title, description, coverUrl, isFeature
   return (<>
             <StyledTableRow  key={date} onClick={handleDetail}>
               <StyledTableCell component="th" scope="row">
-              {date}</StyledTableCell>
+              {formatDate(date)}</StyledTableCell>
               <StyledTableCell align="left">{title}</StyledTableCell>
               <StyledTableCell align="left">{isFeatured? <BookmarkIcon/>:null}</StyledTableCell>
             </StyledTableRow>

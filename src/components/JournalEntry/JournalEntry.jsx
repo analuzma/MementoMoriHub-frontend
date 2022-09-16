@@ -6,6 +6,7 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {FloatingEdit} from "../../components"
 import {getJournalEntryWs, deleteJournalEntryWs} from "../../services/journal-ws"
 import { useParams } from "react-router-dom";
+import formatDate from '../../utils/format-date';
 
 const JournalEntry = ({sendMessage}) => {
         const navigate = useNavigate();
@@ -38,7 +39,7 @@ const JournalEntry = ({sendMessage}) => {
     <>
     <FloatingEdit/>
     <div>
-        <h1> {journalEntry.date}</h1>
+        <h1> {formatDate(journalEntry.date)}</h1>
        </div>
     <Grid
  
