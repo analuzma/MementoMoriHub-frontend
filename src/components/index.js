@@ -1,6 +1,6 @@
 export * from './AddJournalEntry'
 export * from './BadgedAvatars'
-export * from './Countdown'
+export * from './LifeCountdown'
 export * from './EditProfile'
 export * from './FloatingAdd'
 export * from './FloatingEdit'

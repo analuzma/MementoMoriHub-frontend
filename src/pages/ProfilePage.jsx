@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Container, Paper, Box, Stack, Grid} from '@mui/material/';
 import dayjs from 'dayjs';
-import { Countdown, FloatingEdit, BadgeAvatars, EditProfile } from '../components';
+import { FloatingEdit, BadgeAvatars, EditProfile } from '../components';
 
 const ProfilePage = ({user, authentication, sendMessage}) => {
 
@@ -67,16 +67,23 @@ const percentageAlive = String(100-percentageDead).slice(0, 2)
     <BadgeAvatars {...user}/>
     <h1>{user.firstName}</h1>
     </Stack>
+    <p>You have lived <b>{percentageAlive}%</b> of your life already<br /> and the other <b>{percentageDead}% </b> you <u>might never have it</u></p>
     <h2>You can expect to live approximately:</h2>
     <b style={{color:"#44B600", fontSize:"35px"}}>{yearsLeftToLive}</b><p>years</p> 
     <b style={{color:"#44B600", fontSize:"35px"}}>{monthLeftToLive} </b><p>months</p>
     <b style={{color:"#44B600", fontSize:"35px"}}>{weeksLeftToLive} </b><p>weeks</p>
     <b style={{color:"#44B600", fontSize:"35px"}}>{daysLeftToLive}</b><>days</> 
-    <p>You have lived <b>{percentageAlive}%</b> of your life already and the other <b>{percentageDead}% </b> you might never have it</p>
         </Paper>
 
       {editingProfileShown ? (
-       <><Countdown {...user}/>
+       <>
+       <Grid item>
+<br />
+                *The average human lifespan nowadays is 80 years.
+That means, your life is made up of (hopefully) 4,174 weeks.
+<br />
+   </Grid>
+
           <Box
       sx={{
              display: 'flex',
@@ -91,14 +98,11 @@ const percentageAlive = String(100-percentageDead).slice(0, 2)
     >
     </Box>
           <Grid container justifyContent="flex-end">
-            <Grid item>
-<br />
-                *The average human lifespan nowadays is 80 years.
-That means, your life is made up of (hopefully) 4,174 weeks.
-   </Grid>
+            
              </Grid>
 </> 
       ) : (
+        
  <EditProfile {...{user, authentication, sendMessage, editHandler}}></EditProfile>
  )}
   
