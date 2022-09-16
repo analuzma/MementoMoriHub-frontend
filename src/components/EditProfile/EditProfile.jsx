@@ -71,15 +71,16 @@ const EditProfile = ( {user, setUser, authentication, sendMessage, editHandler} 
       setError(error.errorMessage);
     }
   };
-  //not working yet
+  //NOT WORKING YET
   //   const handleDeleteAccount = async (e) => {
   //   deleteUserWs(user)
   //   .then(() => {
   //   console.log(user)
-  //   setUser(null)
-  //   localStorage.removeItem("user")
-  //   sendMessage("You deleted your account", "error")
+  //   // setUser(null)
+  //   // localStorage.removeItem("user")
+  //   sendMessage("You deleted your account", "warning")
   //   Navigate("/")
+  //   console.log("deleted user", user)
   //     })
   //     .catch((err) => {
   //       setError(err);
@@ -169,8 +170,8 @@ const EditProfile = ( {user, setUser, authentication, sendMessage, editHandler} 
             <Button type="submit" variant="contained">
               EDIT PROFILE
             </Button>
-            {/* NOT WORKING YET
-            <div> 
+            {/* NOT WORKING YET */}
+            {/* <div> 
                 <Grid  container justifyContent="flex-end" onClick={handleDeleteAccount}>
             <Button color="error">
               DELETE ACCOUNT

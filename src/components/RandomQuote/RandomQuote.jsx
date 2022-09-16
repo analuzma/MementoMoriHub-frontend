@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import { Button } from '@mui/material';
+import { Button, Box, Paper, CircularProgress } from '@mui/material';
 import {createFavQuoteWs} from "../../services/stoic-quotes-ws"
 import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -60,8 +60,28 @@ const RandomQuote =(props)=> {
     <>
         <Button onClick={getRandomQuote} color="success">Get another quote <FormatQuoteIcon/></Button>
         <Button onClick={addToFavorites}color="secondary">Add to favorites <FavoriteBorderIcon/></Button>
-        <h1>{body}</h1>
-        <p>- {author}</p>
+        <Box
+        sx={{
+          display: "flex",
+          alignItems:"center",
+          justifyContent:"center", 
+          flexDirection: "column",
+          mt: 5,
+        }}
+      >
+          <Paper sx={{ maxWidth: 1000, p:"20px" }}>
+
+            {body ? (
+            <>
+              <h2>{body}</h2>
+            <p>- <b style={{color:"gold", fontSize:"20px"}}>{author}</b></p>
+            </>
+            ) : (
+              <><CircularProgress/></>
+            )}
+            
+        </Paper>
+        </Box>
     </>
       )
     }
