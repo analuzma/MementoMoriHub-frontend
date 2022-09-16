@@ -1,9 +1,17 @@
 import React from 'react'
 import { AddJournalEntry } from '../components'
-const JournalWritePage = ({user, sendMessage}) => {
+import noiceBg from "../img/noicebg.png"
 
+const JournalWritePage = ({user, sendMessage}) => {
+  const myStyle={
+    backgroundImage: `url(${noiceBg})`,
+    height:'90vh',
+    marginTop:"-70px",
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+};
   return (
-    <div><h1>Write new journal entry</h1>
+    <div style={myStyle}><h1>Write new journal entry</h1>
         <AddJournalEntry {...sendMessage}></AddJournalEntry>
     </div>
   )

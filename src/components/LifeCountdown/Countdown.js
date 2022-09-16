@@ -2,12 +2,11 @@ import React, {useRef, useEffect, useState} from 'react'
 import { styled } from '@mui/material/styles';
 import {Paper, Grid, CircularProgress} from '@mui/material/';
 import dayjs from 'dayjs';
-import formatDate from '../../utils/format-date';
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
-  padding: theme.spacing(1),
+  padding: theme.spacing(2),
   textAlign: 'center',
   color: theme.palette.text.secondary,
 }));
@@ -19,8 +18,6 @@ const LifeCountdown = (user) => {
   const [timerHours, setTimerHours]=useState(0)
   const [timerMinutes, setTimerMinutes]=useState(0)
   const [timerSeconds, setTimerSeconds]=useState(0)
-  const [isLoading, setIsLoading] = useState(true);
- 
 
   let interval = useRef();
 
@@ -47,7 +44,6 @@ const dod = dayjs(dob).add(80, 'year')
         clearInterval(interval.current)
       } else {
         //update timer
-        setIsLoading(false);
         setTimerYears(years)
         setTimerMonths(months)
         setTimerDays(days)
@@ -68,47 +64,65 @@ const dod = dayjs(dob).add(80, 'year')
 
   return (
     <div>
-        <Paper sx={{p:"1px", mt:"5px"}}>
-          <h2>Remember death...</h2>
-
-                    </Paper>
-   <Grid
-  container
-    fullWidth
-  direction="row"
-  alignItems="center"
-  justifyContent="center"
->
-      <Grid container spacing={2} columns={70} style={{ minHeight: '5vh', m:"5px", display:"flex",direction:"row",
+ 
+      <Grid container columns={{ xs: 4, md: 80 }} style={{ minHeight: '5vh', display:"flex",direction:"row",
       alignItems:"center",
       justifyContent:"center"}}>
-        <Grid item xs={8}>
-          <Item style={{fontSize:30, fontFamily:'warnock'}}>
-          { !isLoading && timerYears.length > 0 ? (
-            <><CircularProgress /> </>       
-          ) : (
+        <Grid item xs={10}>
+          <Item style={{fontSize:30, fontFamily:'warnock', margin:"3px"}}>
+          { timerYears ? (
             <>{timerYears}</>
+          ) : (
+            <><CircularProgress /> </>       
           )}
           <br />Years</Item> 
         </Grid>
         <Grid item xs={8}>
-          <Item style={{fontSize:30}}>{timerMonths}<br />Months</Item> 
+          <Item  style={{fontSize:30, fontFamily:'warnock', margin:"3px"}}>
+          { timerMonths ? (
+            <>{timerMonths}</>
+          ) : (
+            <><CircularProgress /> </>       
+          )}
+          <br />Months</Item> 
         </Grid>
-        <Grid item xs={8}>
-          <Item style={{fontSize:30}}>{timerDays}<br />Days</Item> 
+        <Grid item xs={10}>
+          <Item  style={{fontSize:30, fontFamily:'warnock', margin:"3px"}}>
+          { timerDays ? (
+            <>{timerDays}</>
+          ) : (
+            <><CircularProgress /> </>       
+          )}
+          <br />Days</Item> 
         </Grid>
-        <Grid item xs={8}>
-          <Item style={{fontSize:30}}>{timerHours}<br />Hours</Item> 
+        <Grid item xs={10}>
+          <Item  style={{fontSize:30, fontFamily:'warnock', margin:"3px"}}>
+          { timerHours ? (
+            <>{timerHours}</>
+          ) : (
+            <><CircularProgress /> </>       
+          )}
+          <br />Hours</Item> 
         </Grid>
-        <Grid item xs={8}>
-          <Item style={{fontSize:30}}>{timerMinutes}<br />Minutes</Item>
+        <Grid item xs={10}>
+          <Item  style={{fontSize:30, fontFamily:'warnock', margin:"3px"}}>
+          { timerMinutes ? (
+            <>{timerMinutes}</>
+          ) : (
+            <><CircularProgress /> </>       
+          )}
+          <br />Minutes</Item>
         </Grid>
-          <Grid item xs={8}>
-          <Item style={{fontSize:30}}>{timerSeconds}<br />Seconds</Item>
+          <Grid item xs={10}>
+          <Item style={{fontSize:30, fontFamily:'warnock', margin:"3px"}}>
+          { timerSeconds ? (
+            <>{timerSeconds}</>
+          ) : (
+            <><CircularProgress /> </>       
+          )}
+          <br />Seconds</Item>
         </Grid>
       </Grid>
-
-    </Grid>
     </div>
   )
 }

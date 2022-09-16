@@ -7,6 +7,7 @@ import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 import skullBg from '../img/skullbg.jpg'
 
 const HomePage = () => {
+
   return (
     <div>
       <Grid container component="main" sx={{ height: '96vh' }}>
@@ -42,9 +43,9 @@ const HomePage = () => {
         alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px"}} > 
 
   <Stack direction="column" alignItems="center" spacing={4}>
-    <HistoryEduIcon fontSize="large"/>Private Journal
     <CalendarMonthIcon  fontSize="large"/>Memento Mori Calendar
     <HourglassTopIcon  fontSize="large"/>Life Countdown
+    <HistoryEduIcon fontSize="large"/>Private Journal
     <FormatQuoteIcon  fontSize="large"/>Stoic Quotes
     </Stack>
 

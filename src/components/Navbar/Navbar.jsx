@@ -14,16 +14,16 @@ const pages = [
       path: '/calendar'
     },
     {
+    name: 'Countdown',
+    path: '/countdown'
+  },
+    {
       name: 'Journal',
       path: '/journal'
     },
       {
       name: 'Quotes',
       path: '/quotes'
-    },
-      {
-      name: 'Countdown',
-      path: '/countdown'
     }];
 
 const Navbar = ({user, setUser, sendMessage}) => {

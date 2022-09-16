@@ -1,1 +1,1 @@
-export {default as LifeCountdown} from './LifeCountdown'
+export {default as LifeCountdown} from './Countdown'

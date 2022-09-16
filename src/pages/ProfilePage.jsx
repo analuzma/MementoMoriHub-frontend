@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import { FloatingEdit, BadgeAvatars, EditProfile } from '../components';
 
 const ProfilePage = ({user, authentication, sendMessage}) => {
-
+  
 //users dates
 const dateOfBirth = dayjs(user.dateOfBirth);
 const dateOfDeath = dayjs(dateOfBirth).add(80, 'year')
