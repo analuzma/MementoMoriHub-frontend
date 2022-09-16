@@ -120,7 +120,7 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
               name="description"
               variant="outlined"
               onChange={handleChange}
-              style={{ width: 400, fontFamily:'warnock-pro', fontSize:20, color:"white", backgroundColor:"black", p:5 }}
+              style={{ width: 400, fontFamily:'warnock', fontSize:20, color:"white", backgroundColor:"black", p:5 }}
             />
             {/*isFeatured*/}
            <Grid container justifyContent="end" paddingTop={0} paddingRight={2}>

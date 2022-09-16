@@ -18,11 +18,11 @@ const pages = [
       path: '/journal'
     },
       {
-      name: 'quotes',
+      name: 'Quotes',
       path: '/quotes'
     },
       {
-      name: 'wisdom',
+      name: 'Wisdom',
       path: '/wisdom'
     }];
 
@@ -46,7 +46,6 @@ const Navbar = ({user, setUser, sendMessage}) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
 
     const handleLogout = () => {
     setUser(null)
@@ -112,7 +111,7 @@ const Navbar = ({user, setUser, sendMessage}) => {
             >
               {pages.map(({name, path, index}) => (
                 <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center"><Link to={path}  style={{ textDecoration: 'none' }}>{name}</Link></Typography>
+                  <Typography textAlign="center"><Link to={path} style={{ textDecoration: 'none', color:"white" }}>{name}</Link></Typography>
                 </MenuItem>
               ))}
             </Menu>

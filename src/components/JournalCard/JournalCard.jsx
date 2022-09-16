@@ -37,15 +37,11 @@ const JournalCard = ({journalEntry, _id, title, description, coverUrl, isFeature
     navigate(`/journal/${_id}`);
   };
 
-    const deleteRequest = async () => {
-
-  };
-
 
   return (<>
             <StyledTableRow  key={date} onClick={handleDetail}>
               <StyledTableCell component="th" scope="row">
-               {date}</StyledTableCell>
+              {date}</StyledTableCell>
               <StyledTableCell align="left">{title}</StyledTableCell>
               <StyledTableCell align="left">{isFeatured? <BookmarkIcon/>:null}</StyledTableCell>
             </StyledTableRow>
