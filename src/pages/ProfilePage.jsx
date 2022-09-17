@@ -68,7 +68,7 @@ const percentageAlive = String(100-percentageDead).slice(0, 2)
     <h1>{user.firstName}</h1>
     </Stack>
     <p>You have lived <b>{percentageAlive}%</b> of your life already<br /> and the other <b>{percentageDead}% </b> you <u>might never have it</u></p>
-    <h2>You can expect to live approximately:</h2>
+    <h2>You can expect to live a total of:</h2>
     <b style={{color:"#44B600", fontSize:"35px"}}>{yearsLeftToLive}</b><p>years</p> 
     <b style={{color:"#44B600", fontSize:"35px"}}>{monthLeftToLive} </b><p>months</p>
     <b style={{color:"#44B600", fontSize:"35px"}}>{weeksLeftToLive} </b><p>weeks</p>

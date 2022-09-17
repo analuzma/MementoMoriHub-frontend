@@ -10,10 +10,6 @@ import skull from "../../img/skull.png"
 
 const pages = [
     {
-      name: 'Calendar',
-      path: '/calendar'
-    },
-    {
     name: 'Countdown',
     path: '/countdown'
   },
@@ -24,6 +20,9 @@ const pages = [
       {
       name: 'Quotes',
       path: '/quotes'
+    },    {
+      name: 'Profile',
+      path: '/profile'
     }];
 
 const Navbar = ({user, setUser, sendMessage}) => {
@@ -172,13 +171,6 @@ const Navbar = ({user, setUser, sendMessage}) => {
               onClose={handleCloseUserMenu}
             >
               {/* user settings */}
-                <MenuItem  onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">
-                    <Link to={'/profile'}  style={{ textDecoration: 'none', color: 'inherit' }}>
-                      <AccountCircleIcon></AccountCircleIcon>Profile
-                      </Link>
-                      </Typography>
-                </MenuItem>
                               <MenuItem  onClick={handleCloseUserMenu}>
                   <div onClick={handleLogout}>
                     <Typography textAlign="center" >
