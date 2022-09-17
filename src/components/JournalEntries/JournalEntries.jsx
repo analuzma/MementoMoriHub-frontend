@@ -96,7 +96,7 @@ const JournalEntries = (props) => {
         ) : (
           
           <>
-          { journalEntries ==0 ?(
+          { journalEntries == 0 ?(
             <>
             
                 <Typography

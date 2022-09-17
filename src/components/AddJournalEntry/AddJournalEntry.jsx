@@ -94,7 +94,6 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
   component="div"
   sx={{ mb: 3, fontFamily:"warnock" }}
 >
-  {/* QUOTE TO STYLE */}
   <h6>I will keep constant watch over myself and - most importantly - will put each day up for review. - <b style={{color:"gold", fontSize:"16px"}}>Seneca The Younger</b></h6>
 </Typography>
  
