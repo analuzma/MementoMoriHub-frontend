@@ -27,7 +27,6 @@ const JournalEntry = ({sendMessage}) => {
         setJournalEntry(data.journalEntry);
         setIsLoading(false);
         navigate("/journal")
-        sendMessage("Deleted journal entry", "success") //doesnt send
                         }
                     
         useEffect(() => {
@@ -37,7 +36,6 @@ const JournalEntry = ({sendMessage}) => {
           return (
 
     <>
-    <FloatingEdit/>
     <div>
         <h1> {formatDate(journalEntry.date)}</h1>
        </div>
@@ -52,8 +50,8 @@ const JournalEntry = ({sendMessage}) => {
     alignItems:"center", flexDirection:"column", p:"30px", width:"80%"}} > 
             {!isLoading && journalEntry ? 
         (<>
-            <h1>{journalEntry.title}</h1>
-            <p>{journalEntry.description}</p></>
+            <h2>{journalEntry.title}</h2>
+            <p style={{fontSize:"24px", fontFamily:'warnock'}}>{journalEntry.description}</p></>
         ) : ( <>
             <CircularProgress></CircularProgress></>
         )}

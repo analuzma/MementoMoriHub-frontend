@@ -62,7 +62,6 @@ const AddJournalEntry = (sendMessage) => {
     try {
       newJournalEntryWs(values).then((response) => {
         if (response.status) {
-          // sendMessage("Journal entry created!", "success")
           navigate('/journal')
           setTimeout(() => {
           }, 3000);
@@ -96,7 +95,7 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
   sx={{ mb: 3, fontFamily:"warnock" }}
 >
   {/* QUOTE TO STYLE */}
-  I will keep constant watch over myself and - most importantly - will put each day up for review. - Seneca The Younger
+  <h6>I will keep constant watch over myself and - most importantly - will put each day up for review. - <b style={{color:"gold", fontSize:"16px"}}>Seneca The Younger</b></h6>
 </Typography>
  
           <form onSubmit={handleFormSubmission} >
@@ -112,7 +111,8 @@ alignItems:"center", justifyContent:"center", flexDirection:"column", p:"30px", 
             />
             {/* description */}
             <TextField
-              minRows={30}
+              minRows={10}
+              maxRows={30}
               multiline
               aria-label="maximum height"
               placeholder="Write your journal entry here..."

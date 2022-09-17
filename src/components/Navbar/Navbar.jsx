@@ -50,7 +50,7 @@ const Navbar = ({user, setUser, sendMessage}) => {
     const handleLogout = () => {
     setUser(null)
     localStorage.removeItem("user")
-    sendMessage("You have logged out. See you next time...hopefully", "error")
+    sendMessage("You have logged out. See you next time...hopefully", "success")
     navigate("/");
   };
 

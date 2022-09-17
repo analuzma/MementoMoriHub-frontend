@@ -25,7 +25,7 @@ const RandomQuote =(props)=> {
             setAuthor(data.author);
         })
         .catch((err) => {
-            console.log(err.message); //sendmessage
+          setMessage(err.message)
         })
     }
 
@@ -38,8 +38,7 @@ const RandomQuote =(props)=> {
         try {
             createFavQuoteWs(randomQuote).then((response) => {
             if (response.status) {
-                console.log("updated fav quotes")
-            //   props.sendMessage("Profile updated!", "success")
+                setMessage("New favorite quote added")
               setTimeout(() => {
                 // window.location.reload();
               }, 3000);

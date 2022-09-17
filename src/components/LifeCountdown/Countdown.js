@@ -4,7 +4,7 @@ import {Paper, Grid, CircularProgress} from '@mui/material/';
 import dayjs from 'dayjs';
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+  backgroundColor: "#463681",
   ...theme.typography.body2,
   padding: theme.spacing(2),
   textAlign: 'center',
