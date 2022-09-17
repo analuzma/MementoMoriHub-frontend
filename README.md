@@ -7,7 +7,7 @@
 [DEMO](https://memento-mori-hub.herokuapp.com/ "DEMO")
 
 **Sign in credentials:
-| user@gmail.com | Usuario.1 |
+| memento@mori.com | Memento.mori1 |
 
 ## MERN Stack
 **Built With**
