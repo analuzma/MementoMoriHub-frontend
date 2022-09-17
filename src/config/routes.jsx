@@ -1,5 +1,5 @@
 //importar mis pages
-import {AuthPage, ProfilePage, CalendarPage, JournalPage, JournalWritePage,HomePage, JournalDetailPage, QuotesPage, WisdomPage}  from '../pages'
+import {AuthPage, ProfilePage, CalendarPage, JournalPage, JournalWritePage,HomePage, JournalDetailPage, QuotesPage, CountdownPage}  from '../pages'
 
 const routes = (props)=>{
     //<Route path="/" element={componente} />
@@ -41,8 +41,8 @@ const routes = (props)=>{
             element:<QuotesPage {...props}/>
         },
                         {
-            path:"/wisdom",
-            element:<WisdomPage {...props}/>
+            path:"/countdown",
+            element:<CountdownPage {...props}/>
         }
     ]
 }

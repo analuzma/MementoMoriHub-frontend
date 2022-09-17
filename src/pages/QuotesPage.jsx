@@ -7,8 +7,8 @@ const QuotesPage = (props) => {
   return (
     <div>
       <h1><FormatQuote/>Stoic Quotes</h1>
-      <RandomQuote/>
-      <FavoritedQuotes/>
+      <RandomQuote {...props}/>
+
     </div>
   )
 }

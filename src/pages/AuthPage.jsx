@@ -6,11 +6,14 @@ import { SignUpForm, SignInForm} from '../components'
 import { useLocation} from "react-router-dom";
 import darkWavesBg from "../img/gradientBg.jpg"
 
+
 const AuthPage = (props) => {
 
   const location = useLocation()
 
+
   return (
+
       <Grid container component="main" sx={{ height: '96vh' }}>
         <Grid
           item

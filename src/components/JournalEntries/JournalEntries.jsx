@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { styled } from '@mui/material/styles';
-import { Grid, Box,  CircularProgress, TableCell, tableCellClasses, TableRow, TableContainer, Paper, Table, TableHead,Button, TableBody } from "@mui/material";
+import { Typography, Grid, Box,  CircularProgress, TableCell, tableCellClasses, TableRow, TableContainer, Paper, Table, TableHead,Button, TableBody } from "@mui/material";
 import { getJournalEntriesByUserWs } from "../../services/journal-ws"
 import { useNavigate } from "react-router-dom";
 import {JournalCard} from "../JournalCard";
@@ -96,10 +96,18 @@ const JournalEntries = (props) => {
         ) : (
           
           <>
-          { journalEntries ==0 ?(
+          { journalEntries == 0 ?(
             <>
-                {/* QUOTE TO STYLE */}
-            <h2><b>Our life is what our toughts make it </b>- Marcus Aurelius</h2>
+            
+                <Typography
+  variant="h5"
+  gutterBottom
+  component="div"
+  sx={{ mb: 3, fontFamily:"warnock" }}
+>
+  <h3>Our life is what our thoughts make it. - <b style={{color:"gold", fontSize:"16px"}}>Marcus Aurelius</b></h3>
+</Typography>
+
           <Grid container justifyContent="flex-end">
             <Button  onClick={handleCreateJournalEntry}>
               Write your first entry
